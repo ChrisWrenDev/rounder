@@ -1,4 +1,4 @@
-package com.pokemon.rounder.rest;
+package com.pokemon.rounder.controller;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +16,7 @@ import jakarta.annotation.PostConstruct;
 @RestController
 @RequestMapping("/api")
 public class PokemonController {
-    private List<Pokemon> pokemon;
+  private List<Pokemon> pokemon;
 
   // load the pokemon data (only once)
   @PostConstruct
@@ -36,7 +36,7 @@ public class PokemonController {
   }
 
   // define endpoint for "/rankings" - return list of pokemon
-  @GetMapping("/pokemon")
+  @GetMapping("/pokemon/ranking")
   public List<Pokemon> getRankings() {
     return pokemon;
   }
