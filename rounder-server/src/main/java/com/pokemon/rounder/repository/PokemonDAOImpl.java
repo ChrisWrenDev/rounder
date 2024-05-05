@@ -31,7 +31,12 @@ public class PokemonDAOImpl implements PokemonDAO {
   }
 
   @Override
-  public List<Pokemon> getRankings() {
+  public Pokemon findById(Integer id){
+    return entityManager.find(Pokemon.class, id);
+  }
+
+  @Override
+  public List<Pokemon> findAll() {
     TypedQuery<Pokemon> theQuery = entityManager.createQuery("FROM Pokemon", Pokemon.class);
     return theQuery.getResultList();
   }

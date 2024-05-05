@@ -13,7 +13,9 @@ public interface PokemonDAO {
 
    void update(Pokemon pokemon);
 
-   List<Pokemon> getRankings();
+   Pokemon findById(Integer id);
+
+   List<Pokemon> findAll();
 
    void delete(Integer id);
 

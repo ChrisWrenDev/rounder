@@ -58,7 +58,7 @@ public class Pokemon {
     return rank;
   }
 
-  public void setEmail(int rank) {
+  public void setRank(int rank) {
     this.rank = rank;
   }
 
