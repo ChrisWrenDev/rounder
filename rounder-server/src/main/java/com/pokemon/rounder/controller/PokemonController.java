@@ -14,29 +14,16 @@ import com.pokemon.rounder.entity.Pokemon;
 import com.pokemon.rounder.repository.PokemonDAO;
 import com.pokemon.rounder.service.PokemonService;
 
-import jakarta.annotation.PostConstruct;
-
 @RestController
 @RequestMapping("/api")
 public class PokemonController {
   private PokemonDAO pokemonDAO;
+  private PokemonService pokemonService;
 
   @Autowired
-  public PokemonController(PokemonDAO thePokemonDAO){
+  public PokemonController(PokemonDAO thePokemonDAO, PokemonService thePokemonService){
     pokemonDAO = thePokemonDAO;
-  }
-
-  // Request the pokemon data on load to populate database
-  @Autowired
-  @PostConstruct
-  public void loadData(PokemonService pokemonService) {
-    // Request data from Pokemon apis
-    // Pokemon pokemon = new Pokemon(1,"full name","image url", 0);
-    List<Pokemon> pokemons = pokemonService.getAllPokemon();
-    // Update database with data
-    for(Pokemon pokemon : pokemons){
-      pokemonDAO.save(pokemon);
-    }
+    pokemonService = thePokemonService;
   }
 
   // define endpoint for "/pokemon" - return list of pokemon
@@ -48,7 +35,16 @@ public class PokemonController {
   // define endpoint for "/pokemon/{pokemonId}" - return pokemon using id
   @GetMapping("/pokemon/{pokemonId}")
   public Pokemon getPokemon(@PathVariable int pokemonId) {
-    return pokemonDAO.findById(pokemonId);
+    // First check database
+    Pokemon pokemonDB = pokemonDAO.findById(pokemonId);
+    if(pokemonDB != null){
+      return pokemonDB;
+    }
+    // Second request from endpoint (pokemonService) 
+    Pokemon pokemonAPI = pokemonService.getPokemon(pokemonId);
+    // Add to databse with 0 rank
+    pokemonDAO.update(pokemonAPI);
+    return pokemonAPI;
   }
 
   // define endpoint for "/pokemon" - update pokemon using payload
