@@ -43,7 +43,7 @@ public class PokemonController {
     // Second request from endpoint (pokemonService) 
     Pokemon pokemonAPI = pokemonService.getPokemon(pokemonId);
     // Add to databse with 0 rank
-    pokemonDAO.update(pokemonAPI);
+    pokemonDAO.save(pokemonAPI);
     return pokemonAPI;
   }
 
