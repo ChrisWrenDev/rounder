@@ -49,7 +49,7 @@ public class PokemonController {
 
   // define endpoint for "/pokemon" - update pokemon using payload
   @PostMapping("/pokemon")
-  public void getStudent(@RequestBody Pokemon pokemon) {
+  public void updatePokemon(@RequestBody Pokemon pokemon) {
     pokemonDAO.update(pokemon);
   }
 }
