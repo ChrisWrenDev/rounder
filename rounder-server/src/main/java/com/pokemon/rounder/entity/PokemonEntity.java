@@ -10,7 +10,7 @@ import jakarta.persistence.Column;
 @Entity
 @Table(name = "pokemon")
 @Data
-public class Pokemon {
+public class PokemonEntity {
 
   @Id
   @Column(name = "id")

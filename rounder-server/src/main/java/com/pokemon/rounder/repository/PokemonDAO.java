@@ -2,17 +2,17 @@ package com.pokemon.rounder.repository;
 
 import java.util.List;
 
-import com.pokemon.rounder.entity.Pokemon;
+import com.pokemon.rounder.entity.PokemonEntity;
 
 public interface PokemonDAO {
 
-   void save(Pokemon pokemon);
+   void save(PokemonEntity pokemon);
 
-   void update(Pokemon pokemon);
+   void update(PokemonEntity pokemon);
 
-   Pokemon findById(Integer id);
+   PokemonEntity findById(Integer id);
 
-   List<Pokemon> findAll();
+   List<PokemonEntity> findAll();
 
    void delete(Integer id);
 

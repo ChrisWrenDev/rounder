@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.pokemon.rounder.entity.Pokemon;
+import com.pokemon.rounder.entity.PokemonEntity;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
@@ -22,31 +22,31 @@ public class PokemonDAOImpl implements PokemonDAO {
 
   @Override
   @Transactional
-  public void save(Pokemon pokemon) {
+  public void save(PokemonEntity pokemon) {
     entityManager.persist(pokemon);
   }
 
   @Override
   @Transactional
-  public void update(Pokemon pokemon) {
+  public void update(PokemonEntity pokemon) {
     entityManager.merge(pokemon);
   }
 
   @Override
-  public Pokemon findById(Integer id){
-    return entityManager.find(Pokemon.class, id);
+  public PokemonEntity findById(Integer id) {
+    return entityManager.find(PokemonEntity.class, id);
   }
 
   @Override
-  public List<Pokemon> findAll() {
-    TypedQuery<Pokemon> theQuery = entityManager.createQuery("FROM Pokemon", Pokemon.class);
+  public List<PokemonEntity> findAll() {
+    TypedQuery<PokemonEntity> theQuery = entityManager.createQuery("FROM Pokemon", PokemonEntity.class);
     return theQuery.getResultList();
   }
 
   @Override
   @Transactional
   public void delete(Integer id) {
-    Pokemon pokemon = entityManager.find(Pokemon.class, id);
+    PokemonEntity pokemon = entityManager.find(PokemonEntity.class, id);
     entityManager.remove(pokemon);
   }
 
